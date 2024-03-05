@@ -1,6 +1,7 @@
 # This file contains the implementation of an adder using the basic logic gates.
 
 import logic_gate
+import binary
 
 class half_adder:
     def __init__(self, input1=None, input2=None):
@@ -46,3 +47,25 @@ class full_adder:
         self.half_adder2.set_inputs(self.half_adder1.get_sum(), self.carry_in)
         self.or_gate.set_inputs(self.half_adder1.get_carry(), self.half_adder2.get_carry())
         return self.or_gate.get_output()
+    
+
+class binary_adder:
+    def __init__(self, binary1=None, binary2=None):
+        self.binary1 = binary1
+        self.binary2 = binary2
+
+    def set_inputs(self, binary1, binary2):
+        self.binary1 = binary1
+        self.binary2 = binary2
+
+    def get_sum(self):
+        self.binary1, self.binary2 = binary.give_same_length(self.binary1, self.binary2)
+        carry = 0
+        result = ''
+        for i in range(len(self.binary1)-1, -1, -1):
+            fa = full_adder(self.binary1[i], self.binary2[i], carry)
+            carry = fa.get_carry()
+            result = str(fa.get_sum()) + result
+        if carry:
+            return str(carry) + result
+        return result

@@ -4,10 +4,11 @@
 
 class not_gate:
     def __init__(self, input=None):
-        self.input = input
+        if input is not None:
+            self.input = int(input)
 
     def set_input(self, input):
-        self.input = input
+        self.input = int(input)
 
     def get_output(self):
         return 1 - self.input
@@ -15,24 +16,28 @@ class not_gate:
 
 class and_gate:
     def __init__(self, input1=None, input2=None):
-        self.input1 = input1
-        self.input2 = input2
+        if input1 is not None:
+            self.input1 = int(input1)
+        if input2 is not None:
+            self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
-        self.input1 = input1
-        self.input2 = input2
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def get_output(self):
         return self.input1 * self.input2
 
 class or_gate:
     def __init__(self, input1=None, input2=None):
-        self.input1 = input1
-        self.input2 = input2
+        if input1 is not None:
+            self.input1 = int(input1)
+        if input2 is not None:
+            self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
-        self.input1 = input1
-        self.input2 = input2
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def get_output(self):
         return max(self.input1, self.input2)
@@ -41,12 +46,14 @@ class or_gate:
 
 class nand_gate:
     def __init__(self, input1=None, input2=None):
-        self.input1 = input1
-        self.input2 = input2
+        if input1 is not None:
+            self.input1 = int(input1)
+        if input2 is not None:
+            self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
-        self.input1 = input1
-        self.input2 = input2
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def get_output(self):
         return not_gate(and_gate(self.input1, self.input2).get_output()).get_output()
@@ -54,12 +61,14 @@ class nand_gate:
 
 class nor_gate:
     def __init__(self, input1=None, input2=None):
-        self.input1 = input1
-        self.input2 = input2
+        if input1 is not None:
+            self.input1 = int(input1)
+        if input2 is not None:
+            self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
-        self.input1 = input1
-        self.input2 = input2
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def get_output(self):
         return not_gate(or_gate(self.input1, self.input2).get_output()).get_output()
@@ -67,12 +76,14 @@ class nor_gate:
 
 class xor_gate:
     def __init__(self, input1=None, input2=None):
-        self.input1 = input1
-        self.input2 = input2
+        if input1 is not None:
+            self.input1 = int(input1)
+        if input2 is not None:
+            self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
-        self.input1 = input1
-        self.input2 = input2
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def get_output(self):
         input1_and_not_input2 = and_gate(self.input1, not_gate(self.input2).get_output()).get_output()
@@ -82,12 +93,14 @@ class xor_gate:
 
 class xnor_gate:
     def __init__(self, input1=None, input2=None):
-        self.input1 = input1
-        self.input2 = input2
+        if input1 is not None:
+            self.input1 = int(input1)
+        if input2 is not None:
+            self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
-        self.input1 = input1
-        self.input2 = input2
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def get_output(self):
         input1_and_not_input2 = and_gate(self.input1, not_gate(self.input2).get_output()).get_output()
