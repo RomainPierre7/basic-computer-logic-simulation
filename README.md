@@ -39,7 +39,7 @@ The **Arithmetic Logic Unit (ALU)** is the part of the processor that performs a
 - [Logic gates](#logic-gates)
 - [Adder](#adder)
 - [Arithmetic Logic Unit (ALU)](#arithmetic-logic-unit-alu)
-- [Processor Registers](#processor-registers)
+- [Processor Register](#processor-register)
 - [Processor (CPU)](#processor-cpu)
 - [Memory](#memory)
 
@@ -72,7 +72,7 @@ The **Arithmetic Logic Unit (ALU)** is the part of the processor that performs a
 
 **Wikipedia**: https://en.wikipedia.org/wiki/Arithmetic_logic_unit
 
-## Processor Registers
+## Processor Register
 
 - n-bit Register
 
