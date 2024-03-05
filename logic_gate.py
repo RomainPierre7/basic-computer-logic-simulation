@@ -5,8 +5,8 @@
 # -------------------- Main Gates --------------------
 
 class NotGate:
-    def __init__(self, input=0):
-        self.input = int(input)
+    def __init__(self):
+        self.input = 0
 
     def set_input(self, input):
         self.input = int(input)
@@ -16,9 +16,9 @@ class NotGate:
 
 
 class AndGate:
-    def __init__(self, input1=0, input2=0):
-        self.input1 = int(input1)
-        self.input2 = int(input2)
+    def __init__(self):
+        self.input1 = 0
+        self.input2 = 0
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
@@ -28,9 +28,9 @@ class AndGate:
         return self.input1 * self.input2
 
 class OrGate:
-    def __init__(self, input1=0, input2=0):
-        self.input1 = int(input1)
-        self.input2 = int(input2)
+    def __init__(self):
+        self.input1 = 0
+        self.input2 = 0
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
@@ -42,59 +42,85 @@ class OrGate:
 # -------------------- Derived Gates --------------------
 
 class NandGate:
-    def __init__(self, input1=0, input2=0):
-        self.input1 = int(input1)
-        self.input2 = int(input2)
+    def __init__(self):
+        self.input1 = 0
+        self.input2 = 0
+        self.and_gate = AndGate()
+        self.not_gate = NotGate()
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
         self.input2 = int(input2)
 
     def get_output(self):
-        return NotGate(AndGate(self.input1, self.input2).get_output()).get_output()
+        self.and_gate.set_inputs(self.input1, self.input2)
+        self.not_gate.set_input(self.and_gate.get_output())
+        return self.not_gate.get_output()
 
 
 class NorGate:
-    def __init__(self, input1=0, input2=0):
-        self.input1 = int(input1)
-        self.input2 = int(input2)
+    def __init__(self):
+        self.input1 = 0
+        self.input2 = 0
+        self.or_gate = OrGate()
+        self.not_gate = NotGate()
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
         self.input2 = int(input2)
 
     def get_output(self):
-        return NotGate(OrGate(self.input1, self.input2).get_output()).get_output()
+        self.or_gate.set_inputs(self.input1, self.input2)
+        self.not_gate.set_input(self.or_gate.get_output())
+        return self.not_gate.get_output()
 
 
 class XorGate:
-    def __init__(self, input1=0, input2=0):
-        self.input1 = int(input1)
-        self.input2 = int(input2)
+    def __init__(self):
+        self.input1 = 0
+        self.input2 = 0
+        self.and_gate1 = AndGate()
+        self.and_gate2 = AndGate()
+        self.not_gate1 = NotGate()
+        self.not_gate2 = NotGate() 
+        self.or_gate = OrGate() 
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
         self.input2 = int(input2)
 
     def get_output(self):
-        input1_and_not_input2 = AndGate(self.input1, NotGate(self.input2).get_output()).get_output()
-        not_input1_and_input2 = AndGate(NotGate(self.input1).get_output(), self.input2).get_output()
-        return OrGate(input1_and_not_input2, not_input1_and_input2).get_output()
+        self.not_gate1.set_input(self.input1)
+        self.not_gate2.set_input(self.input2)
+        self.and_gate1.set_inputs(self.input1, self.not_gate2.get_output())
+        self.and_gate2.set_inputs(self.not_gate1.get_output(), self.input2)
+        self.or_gate.set_inputs(self.and_gate1.get_output(), self.and_gate2.get_output())
+        return self.or_gate.get_output()
 
 
 class XnorGate:
-    def __init__(self, input1=0, input2=0):
-        self.input1 = int(input1)
-        self.input2 = int(input2)
+    def __init__(self):
+        self.input1 = 0
+        self.input2 = 0
+        self.and_gate1 = AndGate()
+        self.and_gate2 = AndGate()
+        self.not_gate1 = NotGate()
+        self.not_gate2 = NotGate()
+        self.not_gate3 = NotGate()
+        self.or_gate = OrGate() 
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
         self.input2 = int(input2)
 
     def get_output(self):
-        input1_and_not_input2 = AndGate(self.input1, NotGate(self.input2).get_output()).get_output()
-        not_input1_and_input2 = AndGate(NotGate(self.input1).get_output(), self.input2).get_output()
-        return NotGate(OrGate(input1_and_not_input2, not_input1_and_input2).get_output()).get_output()
+        self.not_gate1.set_input(self.input1)
+        self.not_gate2.set_input(self.input2)
+        self.and_gate1.set_inputs(self.input1, self.not_gate2.get_output())
+        self.and_gate2.set_inputs(self.not_gate1.get_output(), self.input2)
+        self.or_gate.set_inputs(self.and_gate1.get_output(), self.and_gate2.get_output())
+        self.not_gate3.set_input(self.or_gate.get_output())
+        return self.not_gate3.get_output()
 
 # -------------------- Functions --------------------
     
