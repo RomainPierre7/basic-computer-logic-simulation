@@ -1,6 +1,6 @@
 # basic-computer-logic-simulation
 
-This is a simple computer logic simulation project
+This is a simple 8-bit computer logic simulation.
 
 ## How to run
 ```bash

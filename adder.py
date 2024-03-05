@@ -1,14 +1,14 @@
 # This file contains the implementation of an adder using the basic logic gates.
 
 import logic_gate
-import binary
+import register
 
-class half_adder:
+class HalfAdder:
     def __init__(self, input1=None, input2=None):
         self.input1 = input1
         self.input2 = input2
-        self.and_gate = logic_gate.and_gate()
-        self.xor_gate = logic_gate.xor_gate()
+        self.and_gate = logic_gate.AndGate()
+        self.xor_gate = logic_gate.XorGate()
 
     def set_inputs(self, input1, input2):
         self.input1 = input1
@@ -23,14 +23,14 @@ class half_adder:
         return self.and_gate.get_output()
     
 
-class full_adder:
+class FullAdder:
     def __init__(self, input1=None, input2=None, carry_in=None):
         self.input1 = input1
         self.input2 = input2
         self.carry_in = carry_in
-        self.half_adder1 = half_adder()
-        self.half_adder2 = half_adder()
-        self.or_gate = logic_gate.or_gate()
+        self.half_adder1 = HalfAdder()
+        self.half_adder2 = HalfAdder()
+        self.or_gate = logic_gate.OrGate()
 
     def set_inputs(self, input1, input2, carry_in):
         self.input1 = input1
@@ -49,23 +49,21 @@ class full_adder:
         return self.or_gate.get_output()
     
 
-class binary_adder:
-    def __init__(self, binary1=None, binary2=None):
-        self.binary1 = binary1
-        self.binary2 = binary2
-
-    def set_inputs(self, binary1, binary2):
-        self.binary1 = binary1
-        self.binary2 = binary2
+class EightBitAdder:
+    def __init__(self):
+        self.register1 = register.EightBitRegister()
+        self.register2 = register.EightBitRegister()
+        self.full_adders = [FullAdder() for _ in range(8)]
+    
+    def set_registers(self, register1, register2):
+        self.register1.write_register(register1)
+        self.register2.write_register(register2)
 
     def get_sum(self):
-        self.binary1, self.binary2 = binary.give_same_length(self.binary1, self.binary2)
-        carry = 0
-        result = ''
-        for i in range(len(self.binary1)-1, -1, -1):
-            fa = full_adder(self.binary1[i], self.binary2[i], carry)
-            carry = fa.get_carry()
-            result = str(fa.get_sum()) + result
-        if carry:
-            return str(carry) + result
-        return result
+        sum = ""
+        carry = "0"
+        for i in range(7, -1, -1):
+            self.full_adders[i].set_inputs(int(self.register1.read_register()[i]), int(self.register2.read_register()[i]), int(carry))
+            sum = str(self.full_adders[i].get_sum()) + sum
+            carry = self.full_adders[i].get_carry()
+        return sum

@@ -2,7 +2,7 @@
 
 # -------------------- Main Gates --------------------
 
-class not_gate:
+class NotGate:
     def __init__(self, input=None):
         if input is not None:
             self.input = int(input)
@@ -14,7 +14,7 @@ class not_gate:
         return 1 - self.input
 
 
-class and_gate:
+class AndGate:
     def __init__(self, input1=None, input2=None):
         if input1 is not None:
             self.input1 = int(input1)
@@ -28,7 +28,7 @@ class and_gate:
     def get_output(self):
         return self.input1 * self.input2
 
-class or_gate:
+class OrGate:
     def __init__(self, input1=None, input2=None):
         if input1 is not None:
             self.input1 = int(input1)
@@ -44,7 +44,7 @@ class or_gate:
 
 # -------------------- Derived Gates --------------------
 
-class nand_gate:
+class NandGate:
     def __init__(self, input1=None, input2=None):
         if input1 is not None:
             self.input1 = int(input1)
@@ -56,10 +56,10 @@ class nand_gate:
         self.input2 = int(input2)
 
     def get_output(self):
-        return not_gate(and_gate(self.input1, self.input2).get_output()).get_output()
+        return NotGate(AndGate(self.input1, self.input2).get_output()).get_output()
 
 
-class nor_gate:
+class NorGate:
     def __init__(self, input1=None, input2=None):
         if input1 is not None:
             self.input1 = int(input1)
@@ -71,10 +71,10 @@ class nor_gate:
         self.input2 = int(input2)
 
     def get_output(self):
-        return not_gate(or_gate(self.input1, self.input2).get_output()).get_output()
+        return NotGate(OrGate(self.input1, self.input2).get_output()).get_output()
 
 
-class xor_gate:
+class XorGate:
     def __init__(self, input1=None, input2=None):
         if input1 is not None:
             self.input1 = int(input1)
@@ -86,12 +86,12 @@ class xor_gate:
         self.input2 = int(input2)
 
     def get_output(self):
-        input1_and_not_input2 = and_gate(self.input1, not_gate(self.input2).get_output()).get_output()
-        not_input1_and_input2 = and_gate(not_gate(self.input1).get_output(), self.input2).get_output()
-        return or_gate(input1_and_not_input2, not_input1_and_input2).get_output()
+        input1_and_not_input2 = AndGate(self.input1, NotGate(self.input2).get_output()).get_output()
+        not_input1_and_input2 = AndGate(NotGate(self.input1).get_output(), self.input2).get_output()
+        return OrGate(input1_and_not_input2, not_input1_and_input2).get_output()
 
 
-class xnor_gate:
+class XnorGate:
     def __init__(self, input1=None, input2=None):
         if input1 is not None:
             self.input1 = int(input1)
@@ -103,15 +103,16 @@ class xnor_gate:
         self.input2 = int(input2)
 
     def get_output(self):
-        input1_and_not_input2 = and_gate(self.input1, not_gate(self.input2).get_output()).get_output()
-        not_input1_and_input2 = and_gate(not_gate(self.input1).get_output(), self.input2).get_output()
-        return not_gate(or_gate(input1_and_not_input2, not_input1_and_input2).get_output()).get_output()
+        input1_and_not_input2 = AndGate(self.input1, NotGate(self.input2).get_output()).get_output()
+        not_input1_and_input2 = AndGate(NotGate(self.input1).get_output(), self.input2).get_output()
+        return NotGate(OrGate(input1_and_not_input2, not_input1_and_input2).get_output()).get_output()
 
 # -------------------- Functions --------------------
     
 def print_truth_table(gate):
-    print("Truth Table for " + gate.__class__.__name__.split('_')[0].upper() + " gate:\n")
-    if len(vars(gate)) == 1:
+    gate_name = gate.__class__.__name__[:-4].upper()
+    print("Truth Table for " + gate_name + " gate:\n")
+    if gate_name == "NOT":
         print("Input | Output")
         print("------|-------")
         for i in range(2):
@@ -127,10 +128,10 @@ def print_truth_table(gate):
     print("\n\n")
 
 def print_all_truth_tables():
-    print_truth_table(not_gate())
-    print_truth_table(and_gate())
-    print_truth_table(or_gate())
-    print_truth_table(nand_gate())
-    print_truth_table(nor_gate())
-    print_truth_table(xor_gate())
-    print_truth_table(xnor_gate())
+    print_truth_table(NotGate())
+    print_truth_table(AndGate())
+    print_truth_table(OrGate())
+    print_truth_table(NandGate())
+    print_truth_table(NorGate())
+    print_truth_table(XorGate())
+    print_truth_table(XnorGate())

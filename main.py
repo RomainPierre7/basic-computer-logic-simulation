@@ -1,21 +1,28 @@
 import logic_gate
 import adder
-import binary
+import register
 
 import random
 
 def main():
-    print("Example of adding two binary numbers:")
+    #logic_gate.print_all_truth_tables()
+    print("Example of adding two 8-bit numbers:")
 
-    binary1 = binary.get_binary_value(random.randint(0, 30))
-    binary2 = binary.get_binary_value(random.randint(0, 30))
-    bin_adder = adder.binary_adder(binary1, binary2)
+    reg1 = register.EightBitRegister()
+    reg2 = register.EightBitRegister()
+    reg1.set_value(random.randint(0, 255))    
+    reg2.set_value(random.randint(0, 255))
 
-    sum = bin_adder.get_sum()
 
-    print(f"Binary 1: {binary1} ({binary.get_base_10_value(binary1)})")
-    print(f"Binary 2: {binary2} ({binary.get_base_10_value(binary2)})")
-    print(f"Sum: {sum} ({binary.get_base_10_value(sum)})")
+    adder1 = adder.EightBitAdder()
+    adder1.set_registers(reg1.read_register(), reg2.read_register())
+
+    reg3 = register.EightBitRegister()
+    reg3.write_register(adder1.get_sum())
+
+    print(f"R1: {reg1.read_register()} ({reg1.get_value()})")
+    print(f"R2: {reg2.read_register()} ({reg2.get_value()})")
+    print(f"R3: {reg3.read_register()} ({reg3.get_value()})")
 
 if __name__ == "__main__":
     main()
