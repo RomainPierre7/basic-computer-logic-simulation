@@ -34,6 +34,15 @@ The **Arithmetic Logic Unit (ALU)** is the part of the processor that performs a
 - Comparators
 - ...
 
+# Components
+
+- [Logic gates](#logic-gates)
+- [Adder](#adder)
+- [Arithmetic Logic Unit (ALU)](#arithmetic-logic-unit-alu)
+- [Processor Registers](#processor-registers)
+- [Processor (CPU)](#processor-cpu)
+- [Memory](#memory)
+
 ## Logic gates
 
 ### Main gates
