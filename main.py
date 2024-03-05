@@ -5,19 +5,19 @@ import register
 import random
 
 def main():
-    #logic_gate.print_all_truth_tables()
-    print("Example of adding two 8-bit numbers:")
+    ARCHITECURE = 8 # 8-bit architecture (can be changed to any value (e.g. 4, 16, 32, 64, 128, 256, etc.))
 
-    reg1 = register.EightBitRegister()
-    reg2 = register.EightBitRegister()
-    reg1.set_value(random.randint(0, 255))    
-    reg2.set_value(random.randint(0, 255))
+    print(f"Example of adding two {ARCHITECURE}-bit numbers (unsigned int range: 0 to {2 ** ARCHITECURE - 1})")
 
+    reg1 = register.Register(ARCHITECURE)
+    reg2 = register.Register(ARCHITECURE)
+    reg1.set_value(random.randint(0, 2 ** ARCHITECURE - 1))
+    reg2.set_value(random.randint(0, 2 ** ARCHITECURE - 1))
 
-    adder1 = adder.EightBitAdder()
+    adder1 = adder.RegisterAdder(ARCHITECURE)
     adder1.set_registers(reg1.read_register(), reg2.read_register())
 
-    reg3 = register.EightBitRegister()
+    reg3 = register.Register(ARCHITECURE)
     reg3.write_register(adder1.get_sum())
 
     print(f"R1: {reg1.read_register()} ({reg1.get_value()})")

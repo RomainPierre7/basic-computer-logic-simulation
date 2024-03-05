@@ -1,21 +1,22 @@
-class EightBitRegister:
-    def __init__(self):
-        self.register = "00000000"
+class Register:
+    def __init__(self, bit_length):
+        self.bit_length = bit_length
+        self.register = "0" * bit_length
 
     def read_register(self):
         return self.register
 
     def write_register(self, value):
-        if isinstance(value, str) and len(value) == 8 and all(bit in '01' for bit in value):
+        if isinstance(value, str) and len(value) == self.bit_length and all(bit in '01' for bit in value):
             self.register = value
         else:
-            print("Invalid input. Please provide an 8-bit binary string.")
+            print(f"Invalid input. Please provide an {self.bit_length}-bit binary string.")
 
     def clear_register(self):
-        self.register = "00000000"
+        self.register = "0" * self.bit_length
 
     def get_value(self):
         return int(self.register, 2)
     
     def set_value(self, value):
-        self.register = format(value, '08b')
+        self.register = format(value, f'0{self.bit_length}b')

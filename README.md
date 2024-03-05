@@ -1,6 +1,6 @@
 # basic-computer-logic-simulation
 
-This is a simple 8-bit computer logic simulation.
+This is a simple computer logic simulation. It includes logic gates, processor registers, and adders. All the components are implemented using Python classes and generalized to any bit size architecture.
 
 ## How to run
 ```bash
@@ -24,12 +24,12 @@ python3 main.py
 
 ## Processor Registers
 
-- 8-bit Register
+- n-bit Register
 
 ## Adder
 
 - Half Adder
 - Full Adder
-- 8-bit Adder
+- n-bit Adder
 
 **Wikipedia**: https://en.wikipedia.org/wiki/Adder_(electronics)

@@ -1,11 +1,12 @@
 # Description: This file contains the classes for the basic logic gates.
 
+# Inputs could be 0 or 1 (as integers), but also '0' or '1' (as strings) for easier input validation.
+
 # -------------------- Main Gates --------------------
 
 class NotGate:
-    def __init__(self, input=None):
-        if input is not None:
-            self.input = int(input)
+    def __init__(self, input=0):
+        self.input = int(input)
 
     def set_input(self, input):
         self.input = int(input)
@@ -15,11 +16,9 @@ class NotGate:
 
 
 class AndGate:
-    def __init__(self, input1=None, input2=None):
-        if input1 is not None:
-            self.input1 = int(input1)
-        if input2 is not None:
-            self.input2 = int(input2)
+    def __init__(self, input1=0, input2=0):
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
@@ -29,11 +28,9 @@ class AndGate:
         return self.input1 * self.input2
 
 class OrGate:
-    def __init__(self, input1=None, input2=None):
-        if input1 is not None:
-            self.input1 = int(input1)
-        if input2 is not None:
-            self.input2 = int(input2)
+    def __init__(self, input1=0, input2=0):
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
@@ -45,11 +42,9 @@ class OrGate:
 # -------------------- Derived Gates --------------------
 
 class NandGate:
-    def __init__(self, input1=None, input2=None):
-        if input1 is not None:
-            self.input1 = int(input1)
-        if input2 is not None:
-            self.input2 = int(input2)
+    def __init__(self, input1=0, input2=0):
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
@@ -60,11 +55,9 @@ class NandGate:
 
 
 class NorGate:
-    def __init__(self, input1=None, input2=None):
-        if input1 is not None:
-            self.input1 = int(input1)
-        if input2 is not None:
-            self.input2 = int(input2)
+    def __init__(self, input1=0, input2=0):
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
@@ -75,11 +68,9 @@ class NorGate:
 
 
 class XorGate:
-    def __init__(self, input1=None, input2=None):
-        if input1 is not None:
-            self.input1 = int(input1)
-        if input2 is not None:
-            self.input2 = int(input2)
+    def __init__(self, input1=0, input2=0):
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)
@@ -92,11 +83,9 @@ class XorGate:
 
 
 class XnorGate:
-    def __init__(self, input1=None, input2=None):
-        if input1 is not None:
-            self.input1 = int(input1)
-        if input2 is not None:
-            self.input2 = int(input2)
+    def __init__(self, input1=0, input2=0):
+        self.input1 = int(input1)
+        self.input2 = int(input2)
 
     def set_inputs(self, input1, input2):
         self.input1 = int(input1)

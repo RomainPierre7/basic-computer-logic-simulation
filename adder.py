@@ -4,9 +4,9 @@ import logic_gate
 import register
 
 class HalfAdder:
-    def __init__(self, input1=None, input2=None):
-        self.input1 = input1
-        self.input2 = input2
+    def __init__(self):
+        self.input1 = 0
+        self.input2 = 0
         self.and_gate = logic_gate.AndGate()
         self.xor_gate = logic_gate.XorGate()
 
@@ -24,10 +24,10 @@ class HalfAdder:
     
 
 class FullAdder:
-    def __init__(self, input1=None, input2=None, carry_in=None):
-        self.input1 = input1
-        self.input2 = input2
-        self.carry_in = carry_in
+    def __init__(self):
+        self.input1 = 0
+        self.input2 = 0
+        self.carry_in = 0
         self.half_adder1 = HalfAdder()
         self.half_adder2 = HalfAdder()
         self.or_gate = logic_gate.OrGate()
@@ -49,11 +49,12 @@ class FullAdder:
         return self.or_gate.get_output()
     
 
-class EightBitAdder:
-    def __init__(self):
-        self.register1 = register.EightBitRegister()
-        self.register2 = register.EightBitRegister()
-        self.full_adders = [FullAdder() for _ in range(8)]
+class RegisterAdder:
+    def __init__(self, bit_length):
+        self.bit_length = bit_length
+        self.register1 = register.Register(bit_length)
+        self.register2 = register.Register(bit_length)
+        self.full_adders = [FullAdder() for _ in range(bit_length)]
     
     def set_registers(self, register1, register2):
         self.register1.write_register(register1)
@@ -61,9 +62,9 @@ class EightBitAdder:
 
     def get_sum(self):
         sum = ""
-        carry = "0"
-        for i in range(7, -1, -1):
-            self.full_adders[i].set_inputs(int(self.register1.read_register()[i]), int(self.register2.read_register()[i]), int(carry))
+        carry = 0
+        for i in range(self.bit_length-1, -1, -1):
+            self.full_adders[i].set_inputs(int(self.register1.read_register()[i]), int(self.register2.read_register()[i]), carry)
             sum = str(self.full_adders[i].get_sum()) + sum
             carry = self.full_adders[i].get_carry()
         return sum
