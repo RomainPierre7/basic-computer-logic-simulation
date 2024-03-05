@@ -22,9 +22,14 @@ python3 main.py
 
 **Wikipedia**: https://en.wikipedia.org/wiki/Logic_gate
 
+## Processor Registers
+
+- 8-bit Register
+
 ## Adder
 
 - Half Adder
 - Full Adder
+- 8-bit Adder
 
 **Wikipedia**: https://en.wikipedia.org/wiki/Adder_(electronics)
