@@ -1,7 +1,7 @@
 # This file contains the implementation of an adder using the basic logic gates.
 
-import logic_gate
-import register
+from components import logic_gate
+from components import register
 
 class HalfAdder:
     def __init__(self):

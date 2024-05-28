@@ -1,6 +1,6 @@
-import logic_gate
-import adder
-import register
+from components import logic_gate
+from components import adder
+from components import register
 
 import random
 
