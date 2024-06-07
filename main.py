@@ -24,5 +24,7 @@ def main():
     print(f"R2: {reg2.read_register()} ({reg2.get_value()})")
     print(f"R3: {reg3.read_register()} ({reg3.get_value()})")
 
+    #logic_gate.print_all_truth_tables()
+
 if __name__ == "__main__":
     main()

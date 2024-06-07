@@ -126,7 +126,7 @@ class XnorGate:
     
 def print_truth_table(gate):
     gate_name = gate.__class__.__name__[:-4].upper()
-    print("Truth Table for " + gate_name + " gate:\n")
+    print("Truth table for " + gate_name + " gate:\n")
     if gate_name == "NOT":
         print("Input | Output")
         print("------|-------")
